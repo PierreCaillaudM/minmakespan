@@ -25,7 +25,7 @@ void Instance::createFromString(string str){
     vector<int> rep = explode(str, ':');
     _nbM = rep[0];
     _n = rep[1];
-    _d = new int[_n];
+    _d = std::vector<int>(_n);
     for(int i=0;i<_n;i++){
         _d[i] = rep[i+2];
     }
@@ -38,7 +38,7 @@ void Instance::execute(){
 void Instance::executeLSA(){
     //Initialisation
     int t = 0;
-    _m = new int[_nbM];
+    _m = std::vector<int>(_nbM);
     for(int i=0; i<_nbM;i++){_m[i]=0;}
     //Execution
     for(int i=0; i<_n;i++){

@@ -7,9 +7,9 @@
 
 class Instance{
     int _nbM;
-    int* _m;
+    std::vector<int> _m;
     int _n;
-    int* _d;
+    std::vector<int> _d;
 
     int borne_inf_max;
     float borne_inf_moy;
