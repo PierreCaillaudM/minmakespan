@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <fstream>
 
 class Instance{
@@ -23,6 +24,7 @@ class Instance{
         void createFromString(std::string str);
         void execute();
         void executeLSA();
+        void executeLPT();
 
         int premiereMachineDispo();
         void print();

@@ -46,6 +46,17 @@ void Instance::executeLSA(){
     }
 }
 
+void Instance::executeLPT(){
+   //Initialisation
+   _m = std::vector<int>(_nbM);
+   //Trier les tâches en ordre décroissant
+   std::sort(_d.rbegin(), _d.rend());
+   //Assigner les tâches
+   for(int i=0; i<_n;i++){
+      _m[premiereMachineDispo()] += _d[i];
+   }
+}
+
 int Instance::premiereMachineDispo(){
     int min = _m[0];
     int indice = 0;
