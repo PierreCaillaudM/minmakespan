@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <time.h>
 
 class Instance{
     int _nbM;
@@ -22,6 +23,7 @@ class Instance{
         Instance();
         void createFromFile(std::string path);
         void createFromString(std::string str);
+        void createRandom(int m, int n, int min, int max);
         void execute();
         void executeLSA();
         void executeLPT();

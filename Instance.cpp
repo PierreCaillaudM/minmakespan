@@ -31,8 +31,18 @@ void Instance::createFromString(string str){
     }
 }
 
+void Instance::createRandom(int m, int n, int min, int max){
+   _nbM = m;
+   _n = n;
+   _d = std::vector<int>(_n);
+   for(int i=0;i<_n;i++){
+      _d[i] = min + (rand() % static_cast<int>(max - min + 1));
+   }
+}
+
 void Instance::execute(){
     executeLSA();
+    executeLPT();
 }
 
 void Instance::executeLSA(){
