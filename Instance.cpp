@@ -54,6 +54,7 @@ void Instance::executeLSA(){
     for(int i=0; i<_n;i++){
         _m[premiereMachineDispo()] += _d[i];
     }
+    res_LSA = *std::max_element(_m.begin(),_m.end());
 }
 
 void Instance::executeLPT(){
@@ -65,6 +66,11 @@ void Instance::executeLPT(){
    for(int i=0; i<_n;i++){
       _m[premiereMachineDispo()] += _d[i];
    }
+   res_LPT = *std::max_element(_m.begin(),_m.end());
+}
+
+void Instance::executeLCP(){
+
 }
 
 int Instance::premiereMachineDispo(){
@@ -84,13 +90,14 @@ void Instance::print(){
     for(int i=0;i<_n;i++){
         cout<<"d"<<i+1<<"["<<_d[i]<<"]";
     }
-    cout<<endl;
+    cout << endl;
 }
 void Instance::printMachines(){
     for(int i=0;i<_nbM;i++){
         cout<<"m"<<i+1<<"["<<_m[i]<<"]";
     }
     cout<<endl;
+    cout << "LSA : " << res_LSA << endl << "LPT : " << res_LPT << endl;
 }
 std::vector<int> Instance::explode(std::string const & str, char delim){
     std::vector<int> result;

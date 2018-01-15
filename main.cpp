@@ -24,6 +24,7 @@ int main (int argc, char *argv[]) {
         i.execute();
 
         i.printMachines();
+        
     }
     else if(choixSaisie==2){
         string strInstance;

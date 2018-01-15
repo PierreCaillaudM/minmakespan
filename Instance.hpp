@@ -27,6 +27,7 @@ class Instance{
         void execute();
         void executeLSA();
         void executeLPT();
+        void executeLCP();
 
         int premiereMachineDispo();
         void print();
