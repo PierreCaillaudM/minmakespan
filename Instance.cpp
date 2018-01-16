@@ -22,6 +22,7 @@ void Instance::createFromFile(string path){
 }
 
 void Instance::createFromString(string str){
+    // Creation de l'instance
     vector<int> rep = explode(str, ':');
     _nbM = rep[0];
     _n = rep[1];
@@ -29,6 +30,7 @@ void Instance::createFromString(string str){
     for(int i=0;i<_n;i++){
         _d[i] = rep[i+2];
     }
+    calculBornes();
 }
 
 void Instance::createRandom(int m, int n, int min, int max){
@@ -38,6 +40,23 @@ void Instance::createRandom(int m, int n, int min, int max){
    for(int i=0;i<_n;i++){
       _d[i] = min + (rand() % static_cast<int>(max - min + 1));
    }
+   calculBornes();
+}
+
+void Instance::calculBornes(){
+  //Calcul de borne inf max
+  borne_inf_max = 0;
+  for(int i=0;i<_n;i++){
+      if(_d[i]>borne_inf_max){
+          borne_inf_max = _d[i];
+      }
+  }
+  //Calcul de borne inf moy
+  float sum = 0.0;
+  for(int i=0;i<_n;i++){
+      sum+=_d[i];
+  }
+  borne_inf_moy = sum/_nbM;
 }
 
 void Instance::execute(){
@@ -87,19 +106,18 @@ int Instance::premiereMachineDispo(){
     return indice;
 }
 
-void Instance::print(){
-    cout <<"m: "<<_nbM<<endl<<"n: "<<_n<<endl;
-    for(int i=0;i<_n;i++){
-        cout<<"d"<<i+1<<"["<<_d[i]<<"]";
-    }
-    cout << endl;
-}
-void Instance::printMachines(){
-    for(int i=0;i<_nbM;i++){
-        cout<<"m"<<i+1<<"["<<_m[i]<<"]";
-    }
-    cout<<endl;
-    cout << "LSA : " << res_LSA << endl << "LPT : " << res_LPT << endl;
+std::string Instance::result(){
+    std::string str;
+    // for(int i=0;i<_nbM;i++){
+    //     str+="m"+std::to_string(i+1)+"["+std::to_string(_m[i])+"]";
+    // }
+    // str+="\n";
+    str+="Borne inférieure max : "+ std::to_string(borne_inf_max)+"\n";
+    str+="Borne inférieure moy : "+ std::to_string(borne_inf_moy)+"\n";
+    str+="LSA : " + std::to_string(res_LSA) + "\n";
+    str+="LPT : " + std::to_string(res_LPT) + "\n";
+
+    return str;
 }
 std::vector<int> Instance::explode(std::string const & str, char delim){
     std::vector<int> result;

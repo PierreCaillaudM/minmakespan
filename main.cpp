@@ -18,21 +18,17 @@ int main (int argc, char *argv[]) {
         cout << "Veuillez saisir le chemin vers le fichier:"<<endl;
         cin >> strPath;
         i.createFromFile(strPath);
-
-        i.print();
-
         i.execute();
+        cout << i.result();//result()
 
-        i.printMachines();
-        
     }
     else if(choixSaisie==2){
         string strInstance;
         cout << "Veuillez saisir l'instance au clavier:"<<endl;
         cin >> strInstance;
         i.createFromString(strInstance);
-
-        i.print();
+        i.execute();
+        cout << i.result();//result()
     }
     else{
       //Initialisation
@@ -56,9 +52,13 @@ int main (int argc, char *argv[]) {
 
       //résolution et affichage
       for(int i=0;i<instances.size();i++) {
-         instances[i].print();
+         //instances[i].print();
          instances[i].execute();
-         instances[i].printMachines();
+         cout << "================================" << endl;
+         cout << instances[i].result();
+         if(i==instances.size()-1){
+           cout << "================================" << endl;
+         }
       }
 
    }

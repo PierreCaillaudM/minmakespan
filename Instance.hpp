@@ -31,10 +31,10 @@ class Instance{
         void executeMyAlgo();
 
         int premiereMachineDispo();
-        void print();
-        void printMachines();
+        std::string result();
     private:
         std::vector<int> explode(std::string const & s, char delim);
+        void calculBornes();
 };
 
 #endif
