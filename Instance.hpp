@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <numeric>
 #include <fstream>
 #include <time.h>
 
@@ -27,7 +28,7 @@ class Instance{
         void execute();
         void executeLSA();
         void executeLPT();
-        void executeLCP();
+        void executeMyAlgo();
 
         int premiereMachineDispo();
         void print();

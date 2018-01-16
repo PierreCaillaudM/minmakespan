@@ -69,8 +69,10 @@ void Instance::executeLPT(){
    res_LPT = *std::max_element(_m.begin(),_m.end());
 }
 
-void Instance::executeLCP(){
-
+void Instance::executeMyAlgo(){
+      //Initialisation
+      _m = std::vector<int>(_nbM);
+      int moy = std::accumulate(_d.begin(),_d.end(),0) / _nbM;
 }
 
 int Instance::premiereMachineDispo(){
