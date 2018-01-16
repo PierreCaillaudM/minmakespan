@@ -32,6 +32,12 @@ class Instance{
 
         int premiereMachineDispo();
         std::string result();
+        int getBorneInfMax();
+        float getBoneInfMoy();
+        float getResLSA();
+        float getResLPT();
+        float getResPerso();
+
     private:
         std::vector<int> explode(std::string const & s, char delim);
         void calculBornes();

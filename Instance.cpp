@@ -108,16 +108,28 @@ int Instance::premiereMachineDispo(){
 
 std::string Instance::result(){
     std::string str;
-    // for(int i=0;i<_nbM;i++){
-    //     str+="m"+std::to_string(i+1)+"["+std::to_string(_m[i])+"]";
-    // }
-    // str+="\n";
     str+="Borne inférieure max : "+ std::to_string(borne_inf_max)+"\n";
     str+="Borne inférieure moy : "+ std::to_string(borne_inf_moy)+"\n";
     str+="LSA : " + std::to_string(res_LSA) + "\n";
     str+="LPT : " + std::to_string(res_LPT) + "\n";
 
     return str;
+}
+
+int Instance::getBorneInfMax(){
+  return borne_inf_max;
+}
+float Instance::getBoneInfMoy(){
+  return borne_inf_moy;
+}
+float Instance::getResLSA(){
+  return res_LSA;
+}
+float Instance::getResLPT(){
+  return res_LPT;
+}
+float Instance::getResPerso(){
+  return res_Perso;
 }
 std::vector<int> Instance::explode(std::string const & str, char delim){
     std::vector<int> result;
