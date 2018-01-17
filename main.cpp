@@ -62,11 +62,7 @@ int main (int argc, char *argv[]) {
       float mi;
       float ri_LPT, ri_LSA, ri_Perso;
       instances[i].execute();
-      //cout << "================================" << endl;
-      //cout << instances[i].result();
-      if(i==instances.size()-1){
-        //cout << "================================" << endl;
-      }
+
       mi = std::max((float) instances[i].getBorneInfMax(), instances[i].getBoneInfMoy());
       ri_LPT = instances[i].getResLPT() / mi;
       sum_ri_LPT += ri_LPT;
