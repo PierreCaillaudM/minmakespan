@@ -21,7 +21,6 @@ int main (int argc, char *argv[]) {
     i.createFromFile(strPath);
     i.execute();
     cout << i.result();//result()
-
   }
   else if(choixSaisie==2){
     string strInstance;
