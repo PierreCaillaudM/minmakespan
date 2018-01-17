@@ -1,5 +1,6 @@
 #include <iostream>
 #include <time.h>
+#include <fstream>
 #include "Instance.hpp"
 
 using namespace std;
@@ -33,6 +34,7 @@ int main (int argc, char *argv[]) {
   else{
     //Initialisation
     int m, n, k, min, max;
+    string filename;
     vector<Instance> instances = vector<Instance>();
     cout << "Veuillez saisir le nombre de machines:"<<endl;
     cin >> m;
@@ -44,6 +46,8 @@ int main (int argc, char *argv[]) {
     cin >> min;
     cout << "Veuillez saisir le maximum pour les taches:"<<endl;
     cin >> max;
+    cout << "Veuillez entrez le nom du fichier de sortie:"<<endl;
+    cin >> filename;
 
     for(int i=0;i<k;i++) {
       Instance ins;
@@ -52,15 +56,16 @@ int main (int argc, char *argv[]) {
     }
 
     //résolution et affichage
+    string res = "";
     float sum_ri_LPT, sum_ri_LSA, sum_ri_Perso;
     for(int i=0;i<instances.size();i++) {
       float mi;
       float ri_LPT, ri_LSA, ri_Perso;
       instances[i].execute();
-      cout << "================================" << endl;
-      cout << instances[i].result();
+      //cout << "================================" << endl;
+      //cout << instances[i].result();
       if(i==instances.size()-1){
-        cout << "================================" << endl;
+        //cout << "================================" << endl;
       }
       mi = std::max((float) instances[i].getBorneInfMax(), instances[i].getBoneInfMoy());
       ri_LPT = instances[i].getResLPT() / mi;
@@ -69,12 +74,18 @@ int main (int argc, char *argv[]) {
       sum_ri_LSA += ri_LSA;
       ri_Perso = instances[i].getResPerso() / mi;
       sum_ri_Perso += ri_Perso;
+      res += "================================\n";
+      res += instances[i].result();
     }
 
-    cout << "ratio d'approximation moyen LSA : " << sum_ri_LSA / k << endl;
-    cout << "ratio d'approximation moyen LPT : " << sum_ri_LPT / k << endl;
-    cout << "ratio d'approximation moyen Perso : " << sum_ri_Perso / k << endl;
-
+    res += "================================\n";
+    res += "ratio d'approximation moyen LSA : " + to_string(sum_ri_LSA/k) + "\n";
+    res += "ratio d'approximation moyen LPT : " + to_string(sum_ri_LPT/k) + "\n";
+    res += "ratio d'approximation moyen Perso : " + to_string(sum_ri_Perso/k) + "\n";
+    cout << res << endl;
+    ofstream write(filename.c_str());
+    write << res;
+    write.close();
   }
 
   return 0;
