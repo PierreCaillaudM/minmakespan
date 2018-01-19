@@ -62,7 +62,7 @@ void Instance::calculBornes(){
 void Instance::execute(){
     executeLSA();
     executeLPT();
-    //executeMyAlgo();
+    executeMyAlgo();
 }
 
 void Instance::executeLSA(){
@@ -90,29 +90,35 @@ void Instance::executeLPT(){
 }
 
 void Instance::executeMyAlgo(){
-      //Initialisation
-      _m = std::vector<int>(_nbM);
-      int moy = std::accumulate(_d.begin(),_d.end(),0) / _nbM;
-      std::vector<int> tachesAAssigner(_d);
+   //Initialisation
+   _m = std::vector<int>(_nbM);
+   std::vector<bool> tachesAssignee(_n, false);
+   int left = 0;
+   int right = tachesAssignee.size()-1;
 
-      for(int i=0;i<_nbM;i++){
-         _m[i] = tachesAAssigner[0];
-         tachesAAssigner.erase(tachesAAssigner.begin());
-         int j = 0;
-         while( (_m[i] <= moy) && (j < tachesAAssigner.size()) ){
-            if( (_m[i]+tachesAAssigner[j]) <= moy ){
-               _m[i] += tachesAAssigner[j];
-               tachesAAssigner.erase(tachesAAssigner.begin()+j);
-            }
-            else{
-               ++j;
-            }
+   //Assigner les tâches machine par machine jusqu'à la moyenne
+   int moy = std::accumulate(_d.begin(),_d.end(),0) / _nbM;
+   for(int i=0;i<_nbM;i++){
+      int j = left;
+      do {
+         if( !tachesAssignee[j] && ((_m[i]+_d[j]) <= moy) ){
+            _m[i] += _d[j];
+            tachesAssignee[j] = true;
+            if(j == left) { ++left; }
+            else if(j == right) { --right; }
          }
+         ++j;
+      } while( (_m[i] <= moy) && (j <= right) );
+   }
+
+   //Assigner les tâches restantes
+   for(int i=left;i<=right;i++){
+      if(!tachesAssignee[i]) {
+         _m[premiereMachineDispo()] += _d[i];
+         tachesAssignee[i] = true;
       }
-      for(int i=0;i<tachesAAssigner.size();i++){
-         _m[premiereMachineDispo()] += tachesAAssigner[i];
-      }
-      res_Perso = *std::max_element(_m.begin(),_m.end());
+   }
+   res_Perso = *std::max_element(_m.begin(),_m.end());
 }
 
 int Instance::premiereMachineDispo(){
@@ -134,7 +140,6 @@ std::string Instance::result(){
     str+="LSA : " + std::to_string(res_LSA) + "\n";
     str+="LPT : " + std::to_string(res_LPT) + "\n";
     str+="Perso : " + std::to_string(res_Perso) + "\n";
-
     return str;
 }
 

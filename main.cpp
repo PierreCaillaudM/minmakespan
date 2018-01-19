@@ -72,12 +72,12 @@ int main (int argc, char *argv[]) {
       res += "================================\n";
       res += instances[i].result();
     }
-
     res += "================================\n";
     res += "ratio d'approximation moyen LSA : " + to_string(sum_ri_LSA/k) + "\n";
     res += "ratio d'approximation moyen LPT : " + to_string(sum_ri_LPT/k) + "\n";
     res += "ratio d'approximation moyen Perso : " + to_string(sum_ri_Perso/k) + "\n";
-    cout << res << endl;
+    //cout << res << endl;
+    //cout << "somme LSA : " << sum_ri_LSA  << "\nsomme LPT : " << sum_ri_LPT << "\nsomme perso : " << sum_ri_Perso << endl;
     ofstream write(filename.c_str());
     write << res;
     write.close();
